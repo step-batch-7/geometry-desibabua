@@ -17,16 +17,25 @@ describe("test for line class", function() {
   });
 
   describe("isEqualTo", function() {
-    it("should check with another line object ", () => {
-      const actualValue = new Line(1, 2, 3, 4);
-      const anotherLine = new Line(1, 2, 3, 4);
-      assert.equal(actualValue.isEqualTo(anotherLine), true);
+    it("should validate with another line object  made with same args", () => {
+      const firstLine = new Line(1, 2, 3, 4);
+      const secondLine = new Line(1, 2, 3, 4);
+      const actualValue = firstLine.isEqualTo(secondLine);
+      assert.ok(actualValue);
     });
 
-    it("should check with another line object ", () => {
-      const actualValue = new Line(1, 2, 3, 4);
-      const anotherLine = new Line(1, 2, 3, 5);
-      assert.equal(actualValue.isEqualTo(anotherLine), false);
+    it("should not validate with another line object made with different args", () => {
+      const firstLine = new Line(1, 2, 3, 4);
+      const secondLine = new Line(1, 2, 3, 2);
+      const actualValue = firstLine.isEqualTo(secondLine);
+      assert.ok(!actualValue);
+    });
+
+    it("should not validate with another similar type of object", () => {
+      const firstLine = new Line(1, 2, 3, 4);
+      const secondLine =  { endA: [ 1, 2 ], endB: [ 3, 4 ] }
+      const actualValue = firstLine.isEqualTo(secondLine);
+      assert.ok(!actualValue);
     });
   });
 });

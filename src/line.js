@@ -1,3 +1,9 @@
+const isPointsEqual = (point1, point2) =>
+  point1[0] === point2[0] && point1[1] === point2[1];
+
+const isTypeSimilar = (line1, line2) =>
+  line1 instanceof Line && line2 instanceof Line;
+
 class Line {
   constructor(a, b, c, d) {
     [this.endA, this.endB] = [
@@ -10,10 +16,9 @@ class Line {
   }
   isEqualTo(anotherLine) {
     return (
-      this.endA[0] == anotherLine.endA[0] &&
-      this.endA[1] == anotherLine.endA[1] &&
-      this.endB[0] == anotherLine.endB[0] &&
-      this.endB[1] == anotherLine.endB[1]
+      isPointsEqual(this.endA, anotherLine.endA) &&
+      isPointsEqual(this.endB, anotherLine.endB) &&
+      isTypeSimilar(this, anotherLine)
     );
   }
 }
