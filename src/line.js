@@ -32,6 +32,11 @@ class Line {
     const vertDistanceBetweenPoints = this.endB.y - this.endA.y
     return vertDistanceBetweenPoints/ horDistanceBetweenPoints
   }
+
+  isParallelTo(other){
+    if(!(other instanceof Line)) return false
+    return this.slope === other.slope
+  }
 }
 
 module.exports = { Line };
