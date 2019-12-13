@@ -16,9 +16,9 @@ class Line {
 
   isEqualTo(anotherLine) {
     return (
+      isTypeSimilar(this, anotherLine) &&
       isPointsEqual(this.endA, anotherLine.endA) &&
-      isPointsEqual(this.endB, anotherLine.endB) &&
-      isTypeSimilar(this, anotherLine)
+      isPointsEqual(this.endB, anotherLine.endB)
     );
   }
 }
