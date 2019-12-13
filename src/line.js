@@ -21,21 +21,17 @@ class Line {
     );
   }
 
-  get length(){
-    const horDistanceBetweenPoints = this.endB.x - this.endA.x
-    const vertDistanceBetweenPoints = this.endB.y - this.endA.y
-    return Math.hypot(horDistanceBetweenPoints,vertDistanceBetweenPoints)
+  get length() {
+    return Math.hypot(this.endB.x - this.endA.x, this.endB.y - this.endA.y);
   }
 
-  get slope(){
-    const horDistanceBetweenPoints = this.endB.x - this.endA.x
-    const vertDistanceBetweenPoints = this.endB.y - this.endA.y
-    return vertDistanceBetweenPoints/ horDistanceBetweenPoints
+  get slope() {
+    return (this.endB.y - this.endA.y) / (this.endB.x - this.endA.x);
   }
 
-  isParallelTo(other){
-    if(!(other instanceof Line)) return false
-    return this.slope === other.slope
+  isParallelTo(other) {
+    if (!(other instanceof Line)) return false;
+    return this.slope === other.slope;
   }
 }
 
