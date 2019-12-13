@@ -20,6 +20,12 @@ class Line {
       arePointsEqual(this.endB, other.endB)
     );
   }
+
+  get length(){
+    const horDistanceBetweenPoints = this.endA.y - this.endB.y
+    const vertDistanceBetweenPoints = this.endB.x - this.endA.x
+    return Math.hypot(horDistanceBetweenPoints,vertDistanceBetweenPoints)
+  }
 }
 
 module.exports = { Line };

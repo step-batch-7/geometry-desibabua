@@ -40,4 +40,12 @@ describe("Line", function() {
       assert.isNotOk(actualValue);
     });
   });
+
+  describe('length',function() {
+    it('should give length of a given line', function() {
+      let line = new Line({ x: 0, y: 0 }, { x: 3, y: 4 });
+      line = line.length
+      assert.strictEqual(line, 5);
+    });
+  });
 });
