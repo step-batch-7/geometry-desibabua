@@ -41,29 +41,34 @@ describe("Line", function() {
     });
   });
 
-  describe('length',function() {
-    it('should give length of a given line with positive values', function() {
+  describe("length", function() {
+    it("should give length of a given line with positive values with exact length", function() {
       let line = new Line({ x: 0, y: 0 }, { x: 3, y: 4 });
-      line = line.length
-      assert.equal(line, 5);
+      assert.equal(line.length, 5);
 
       line = new Line({ x: 0, y: 0 }, { x: 0, y: 4 });
-      line = line.length
-      assert.equal(line, 4);
+      assert.equal(line.length, 4);
 
-      line = new Line({ x: 2, y: 0 }, { x: 0, y: 0});
-      line = line.length
-      assert.notEqual(line, 4);
+      line = new Line({ x: 2, y: 0 }, { x: 0, y: 0 });
+      assert.notEqual(line.length, 4);
     });
 
-    it('should give length of a given line with negative values', function() {
+    it("should give length of a given line with negative values with exact length", function() {
       let line = new Line({ x: 0, y: 0 }, { x: -3, y: 4 });
-      line = line.length
-      assert.equal(line, 5);
+      assert.equal(line.length, 5);
 
       line = new Line({ x: 0, y: 0 }, { x: -3, y: -4 });
-      line = line.length
-      assert.equal(line, 5);
+      assert.equal(line.length, 5);
+    });
+
+    it("should give length of a given line with positive values with floating type  length", function() {
+      let line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
+      assert.approximately(line.length, 2.8, 0.1)
+    });
+
+    it("should give length of a given line with negative values with floating type  length", function() {
+      let line = new Line({ x: 1, y: -2 }, { x: -3, y: 4 });
+      assert.approximately(line.length, 7.2, 0.1)
     });
   });
 });
