@@ -1,8 +1,8 @@
 const assert = require("chai").assert;
 const { Line } = require("../src/line");
 
-describe("test for line class", function() {
-  describe("to String", function() {
+describe("Line", function() {
+  describe("toString", function() {
     it("should give expected representation of line", function() {
       const line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       const actualValue = line.toString;
@@ -35,7 +35,7 @@ describe("test for line class", function() {
 
     it("should invalidate with another type but not the instance of Line as well as Object", () => {
       const firstLine = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
-      const secondLine = ""
+      const secondLine = "";
       const actualValue = firstLine.isEqualTo(secondLine);
       assert.isNotOk(actualValue);
     });

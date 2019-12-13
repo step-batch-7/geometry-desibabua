@@ -1,20 +1,22 @@
-const isPointsEqual = (point1, point2) =>
+const arePointsEqual = (point1, point2) =>
   point1.x === point2.x && point1.y === point2.y;
 
 class Line {
   constructor(endA, endB) {
-    [this.endA,this.endB] = [{ ...endA },{ ...endB }];
+    [this.endA, this.endB] = [{ ...endA }, { ...endB }];
   }
 
   get toString() {
-    return `Line :- (${this.endA.x},${this.endA.y}),(${this.endB.x},${this.endB.y})`;
+    const endA = `(${this.endA.x},${this.endA.y})`;
+    const endB = `(${this.endB.x},${this.endB.y})`;
+    return `Line :- ${endA},${endB}`;
   }
 
   isEqualTo(anotherLine) {
     return (
       anotherLine instanceof Line &&
-      isPointsEqual(this.endA, anotherLine.endA) &&
-      isPointsEqual(this.endB, anotherLine.endB)
+      arePointsEqual(this.endA, anotherLine.endA) &&
+      arePointsEqual(this.endB, anotherLine.endB)
     );
   }
 }
