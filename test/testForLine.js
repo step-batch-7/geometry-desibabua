@@ -26,14 +26,14 @@ describe("Line", function() {
       assert.isNotOk(actualValue);
     });
 
-    it("should invalidate with another similar object but not the instance of Line", () => {
+    it("should invalidate with another similar object but not the instance of Line but having keys of Line", () => {
       const firstLine = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       const secondLine = { endA: { x: 1, y: 2 }, endB: { x: 3, y: 4 } };
       const actualValue = firstLine.isEqualTo(secondLine);
       assert.isNotOk(actualValue);
     });
 
-    it("should invalidate with another type but not the instance of Line as well as Object", () => {
+    it("should invalidate with another type but not the instance of Line but having no keys", () => {
       const firstLine = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       const secondLine = "";
       const actualValue = firstLine.isEqualTo(secondLine);
@@ -81,6 +81,16 @@ describe("Line", function() {
     it("should give slope of a given line(floating value)", function() {
       line = new Line({ x: 0, y: 1 }, { x: 3, y: 0 });
       assert.approximately(line.slope, -0.33, 0.01);
+    });
+
+    it("should give slope of a given line parallel to y - axis", function() {
+      line = new Line({ x: 0, y: 1 }, { x: 0, y: 5 });
+      assert.strictEqual(line.slope, Infinity);
+    });
+
+    it("should give slope of a given line parallel to x - axis", function() {
+      line = new Line({ x: 1, y: 0 }, { x: 6, y: 0 });
+      assert.strictEqual(line.slope, 0);
     });
   });
 
