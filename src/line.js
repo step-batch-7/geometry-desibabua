@@ -13,11 +13,11 @@ class Line {
     return `Line :- ${endA},${endB}`;
   }
 
-  isEqualTo(anotherLine) {
-    if (!(anotherLine instanceof Line)) return false;
+  isEqualTo(other) {
+    if (!(other instanceof Line)) return false;
     return (
-      arePointsEqual(this.endA, anotherLine.endA) &&
-      arePointsEqual(this.endB, anotherLine.endB)
+      arePointsEqual(this.endA, other.endA) &&
+      arePointsEqual(this.endB, other.endB)
     );
   }
 }
