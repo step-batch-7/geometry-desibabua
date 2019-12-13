@@ -71,4 +71,11 @@ describe("Line", function() {
       assert.approximately(line.length, 7.2, 0.1)
     });
   });
+
+  describe('slope',function() {
+    it('should give slope of a given line', function() {
+      let line = new Line({ x: 0, y: 0 }, { x: 1, y: 1 });
+      assert.strictEqual(line.slope , 1);
+    });
+  });
 });
