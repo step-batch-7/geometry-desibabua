@@ -6,8 +6,8 @@ const isTypeSimilar = (line1, line2) =>
 
 class Line {
   constructor(endA, endB) {
-    this.endA = endA;
-    this.endB = endB;
+    this.endA = { ...endA };
+    this.endB = { ...endB };
   }
 
   get toString() {
