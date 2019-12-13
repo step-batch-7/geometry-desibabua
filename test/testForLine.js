@@ -3,21 +3,13 @@ const { Line } = require("../src/line");
 
 describe("test for line class", function() {
   describe("to String", function() {
-    it("should return same string representation of Line object when called with same args", function() {
-      const firstLine = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
-      const secondLine = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
-      const actualValue = firstLine.toString;
-      const expectedValue = secondLine.toString;
+    it("should give expected representation of line", function() {
+      const line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
+      const actualValue = line.toString;
+      const expectedValue = "Line :- (1,2),(3,4)"
       assert.deepStrictEqual(actualValue, expectedValue);
     });
 
-    it("should return different string representation of Line object when called with same args", function() {
-      const firstLine = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
-      const secondLine = new Line({ x: 1, y: 2 }, { x: 3, y: 5 });
-      const actualValue = firstLine.toString;
-      const expectedValue = secondLine.toString;
-      assert.notEqual(actualValue, expectedValue);
-    });
   });
 
   describe("isEqualTo", function() {
