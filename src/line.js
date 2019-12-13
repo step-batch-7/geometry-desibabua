@@ -22,14 +22,14 @@ class Line {
   }
 
   get length(){
-    const horDistanceBetweenPoints = Math.abs(this.endA.y - this.endB.y)
-    const vertDistanceBetweenPoints = Math.abs(this.endB.x - this.endA.x)
+    const horDistanceBetweenPoints = this.endB.x - this.endA.x
+    const vertDistanceBetweenPoints = this.endB.y - this.endA.y
     return Math.hypot(horDistanceBetweenPoints,vertDistanceBetweenPoints)
   }
 
   get slope(){
-    const horDistanceBetweenPoints = Math.abs(this.endA.y - this.endB.y)
-    const vertDistanceBetweenPoints = Math.abs(this.endB.x - this.endA.x)
+    const horDistanceBetweenPoints = this.endB.x - this.endA.x
+    const vertDistanceBetweenPoints = this.endB.y - this.endA.y
     return vertDistanceBetweenPoints/ horDistanceBetweenPoints
   }
 }

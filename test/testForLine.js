@@ -63,19 +63,24 @@ describe("Line", function() {
 
     it("should give length of a given line with positive values with floating type  length", function() {
       let line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
-      assert.approximately(line.length, 2.8, 0.1)
+      assert.approximately(line.length, 2.8, 0.1);
     });
 
     it("should give length of a given line with negative values with floating type  length", function() {
       let line = new Line({ x: 1, y: -2 }, { x: -3, y: 4 });
-      assert.approximately(line.length, 7.2, 0.1)
+      assert.approximately(line.length, 7.2, 0.1);
     });
   });
 
-  describe('slope',function() {
-    it('should give slope of a given line', function() {
+  describe("slope", function() {
+    it("should give slope of a given line(exact value)", function() {
       let line = new Line({ x: 0, y: 0 }, { x: 1, y: 1 });
-      assert.strictEqual(line.slope , 1);
+      assert.strictEqual(line.slope, 1);
+    });
+
+    it("should give slope of a given line(floating value)", function() {
+      line = new Line({ x: 0, y: 1 }, { x: 3, y: 0 });
+      assert.approximately(line.slope, -0.33, 0.01);
     });
   });
 });
