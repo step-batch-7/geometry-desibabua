@@ -30,8 +30,8 @@ class Line {
   }
 
   isParallelTo(other) {
-    if (!(other instanceof Line)) return false;
-    return this.slope === other.slope;
+    if (this.isEqualTo(other)) return false;
+    return other instanceof Line && this.slope === other.slope;
   }
 }
 
