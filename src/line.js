@@ -5,6 +5,10 @@ const getYIntercept = function(slope, x, y) {
   return y - slope * x;
 };
 
+const isNumberInRange = function(number,range1,range2){
+  return (number > range1 && number < range2) || (number < range1 && number > range2)
+}
+
 class Line {
   constructor(endA, endB) {
     this.endA = { x: endA.x, y: endA.y };
@@ -48,11 +52,13 @@ class Line {
   }
 
   findX(y) {
+    if(!isNumberInRange(y,this.endA.y,this.endB.y)) return NaN
     const intercept = getYIntercept(this.slope, this.endA.x, this.endA.y);
     return (y - intercept) / this.slope;
   }
 
   findY(x) {
+    if(!isNumberInRange(x,this.endA.x,this.endB.x)) return NaN
     const intercept = getYIntercept(this.slope, this.endA.x, this.endA.y);
     return (this.slope * x) + intercept;
   }

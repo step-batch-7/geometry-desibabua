@@ -129,13 +129,35 @@ describe("Line", function() {
     it('should give x of given point having y only of a line segment', function() {
       let line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
       assert.strictEqual(line.findX(2),2);
+
+      line = new Line({ x: 4, y: 4 }, { x: 0, y: 0 });
+      assert.strictEqual(line.findX(2),2);
     });
+
+    it('should give Nan when point is outside the line segment',function(){
+      let line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
+      assert.isNaN(line.findX(5))
+
+      line = new Line({ x: 4, y: 4 }, { x: 0, y: 0 });
+      assert.isNaN(line.findX(5))
+    })
   });
 
   describe('findY',function() {
     it('should give x of given point having x only of a line segment', function() {
       let line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
       assert.strictEqual(line.findY(3),3);
+
+      line = new Line({ x: 4, y: 4 }, { x: 0, y: 0 });
+      assert.strictEqual(line.findY(2),2);
     });
+
+    it('should give Nan when point is outside the line segment',function(){
+      let line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
+      assert.isNaN(line.findY(5))
+
+      line = new Line({ x: 4, y: 4 }, { x: 0, y: 0 });
+      assert.isNaN(line.findY(5))
+    })
   });
 });
