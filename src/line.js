@@ -1,14 +1,13 @@
 const arePointsEqual = (pointA, pointB) =>
   pointA.x === pointB.x && pointA.y === pointB.y;
 
-const getYIntercept = function(slope, x, y) {
+const getIntercept = function(slope, x, y) {
   return y - slope * x;
 };
 
-const isNumberInRange = function(number, range1, range2) {
-  return (
-    (number > range1 && number < range2) || (number < range1 && number > range2)
-  );
+const isNumberInRange = function(number, start, end) {
+  const range = [start, end].sort();
+  return number > range[0] && number < range[1];
 };
 
 class Line {
@@ -40,8 +39,8 @@ class Line {
   }
 
   isParallelTo(other) {
-    const linesIntercept = getYIntercept(this.slope, this.endA.x, this.endA.y);
-    const othersIntercept = getYIntercept(
+    const linesIntercept = getIntercept(this.slope, this.endA.x, this.endA.y);
+    const othersIntercept = getIntercept(
       other.slope,
       other.endA.x,
       other.endA.y
@@ -55,35 +54,29 @@ class Line {
 
   findX(y) {
     if (!isNumberInRange(y, this.endA.y, this.endB.y)) return NaN;
-    const intercept = getYIntercept(this.slope, this.endA.x, this.endA.y);
+    const intercept = getIntercept(this.slope, this.endA.x, this.endA.y);
     return (y - intercept) / this.slope;
   }
 
   findY(x) {
     if (!isNumberInRange(x, this.endA.x, this.endB.x)) return NaN;
-    const intercept = getYIntercept(this.slope, this.endA.x, this.endA.y);
+    const intercept = getIntercept(this.slope, this.endA.x, this.endA.y);
     return this.slope * x + intercept;
   }
 
   split() {
-    const xOfMidPoint = (this.endA.x + this.endB.x) / 2;
-    const yOfMidPoint = (this.endA.y + this.endB.y) / 2;
+    const middleX = (this.endA.x + this.endB.x) / 2;
+    const middleY = (this.endA.y + this.endB.y) / 2;
     return [
-      new Line(
-        { x: this.endA.x, y: this.endA.y },
-        { x: xOfMidPoint, y: yOfMidPoint }
-      ),
-      new Line(
-        { x: xOfMidPoint, y: yOfMidPoint },
-        { x: this.endB.x, y: this.endB.y }
-      )
+      new Line({ x: this.endA.x, y: this.endA.y }, { x: middleX, y: middleY }),
+      new Line({ x: middleX, y: middleY }, { x: this.endB.x, y: this.endB.y })
     ];
   }
 
   hasPoint(point) {
     if (!isNumberInRange(point.x, this.endA.x, this.endB.x)) return false;
     if (!isNumberInRange(point.y, this.endA.y, this.endB.y)) return false;
-    const linesIntercept = getYIntercept(this.slope, this.endA.x, this.endA.y);
+    const linesIntercept = getIntercept(this.slope, this.endA.x, this.endA.y);
     return point.y === this.slope * point.x + linesIntercept;
   }
 }
