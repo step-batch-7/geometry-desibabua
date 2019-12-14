@@ -124,4 +124,18 @@ describe("Line", function() {
       assert.strictEqual(line1.isParallelTo(line2), false);
     });
   });
+
+  describe('findX',function() {
+    it('should give x of given point having y only of a line segment', function() {
+      let line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
+      assert.strictEqual(line.findX(2),2);
+    });
+  });
+
+  describe('findY',function() {
+    it('should give x of given point having x only of a line segment', function() {
+      let line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
+      assert.strictEqual(line.findY(3),3);
+    });
+  });
 });
