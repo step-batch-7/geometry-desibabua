@@ -101,11 +101,6 @@ describe("Line", function() {
       assert.strictEqual(line1.isParallelTo(line2), true);
     });
 
-    it("should inValidate same line", function() {
-      let line = new Line({ x: 0, y: 8 }, { x: 0, y: 4 });
-      assert.strictEqual(line.isParallelTo(line), false);
-    });
-
     it("should inValidate unParallel lines if they are of same instance", function() {
       let line1 = new Line({ x: 0, y: 0 }, { x: 1, y: 2 });
       let line2 = new Line({ x: 4, y: 9 }, { x: 4, y: 0 });
@@ -115,6 +110,17 @@ describe("Line", function() {
     it("should inValidate parallel lines if they are of different instance", function() {
       let line1 = new Line({ x: 0, y: 8 }, { x: 0, y: 4 });
       let line2 = { endA: { x: 0, y: 8 }, endB: { x: 0, y: 4 } };
+      assert.strictEqual(line1.isParallelTo(line2), false);
+    });
+
+    it("should inValidate same line segment (overlapping)", function() {
+      let line = new Line({ x: 0, y: 0 }, { x: 1, y: 1 });
+      assert.strictEqual(line.isParallelTo(line), false);
+    });
+
+    it("should inValidate different line segment (overlapping)", function() {
+      let line1 = new Line({ x: 0, y: 0 }, { x: 1, y: 1 });
+      let line2 = new Line({ x: 2, y: 2 }, { x: 3, y: 3 });
       assert.strictEqual(line1.isParallelTo(line2), false);
     });
   });
