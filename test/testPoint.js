@@ -17,7 +17,7 @@ describe("Point", function() {
 
       actualValue = point.visit((x, y) => x * y);
       assert.equal(actualValue, 6);
-      
+
       actualValue = point.visit((x, y) => x / y);
       assert.approximately(actualValue, 0.66, 0.1);
     });
@@ -40,6 +40,13 @@ describe("Point", function() {
       const point1 = new Point(1, 2);
       const point2 = "";
       assert.isFalse(point1.isEqualTo(point2));
+    });
+  });
+
+  describe("clone", function() {
+    it("should give clone of a give Point", function() {
+      const point = new Point(1, 4);
+      assert.isTrue(point.isEqualTo(point.clone()));
     });
   });
 });
