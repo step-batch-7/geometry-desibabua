@@ -174,10 +174,20 @@ describe("Line", function() {
   });
 
   describe("hasPoint", function() {
-    it("should validate point on a given line ", function() {
+    it("should validate point on the given line ", function() {
       const line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
       const point = new Point(2, 2);
       assert.isTrue(line.hasPoint(point));
+    });
+
+    it("should inValidate point it it is not on the given line ", function() {
+      let line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
+      let point = new Point(5, 5);
+      assert.isFalse(line.hasPoint(point));
+
+      line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
+      point = new Point(1, 5);
+      assert.isFalse(line.hasPoint(point));
     });
   });
 });
