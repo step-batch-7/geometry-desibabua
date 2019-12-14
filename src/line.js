@@ -5,9 +5,11 @@ const getYIntercept = function(slope, x, y) {
   return y - slope * x;
 };
 
-const isNumberInRange = function(number,range1,range2){
-  return (number > range1 && number < range2) || (number < range1 && number > range2)
-}
+const isNumberInRange = function(number, range1, range2) {
+  return (
+    (number > range1 && number < range2) || (number < range1 && number > range2)
+  );
+};
 
 class Line {
   constructor(endA, endB) {
@@ -52,15 +54,30 @@ class Line {
   }
 
   findX(y) {
-    if(!isNumberInRange(y,this.endA.y,this.endB.y)) return NaN
+    if (!isNumberInRange(y, this.endA.y, this.endB.y)) return NaN;
     const intercept = getYIntercept(this.slope, this.endA.x, this.endA.y);
     return (y - intercept) / this.slope;
   }
 
   findY(x) {
-    if(!isNumberInRange(x,this.endA.x,this.endB.x)) return NaN
+    if (!isNumberInRange(x, this.endA.x, this.endB.x)) return NaN;
     const intercept = getYIntercept(this.slope, this.endA.x, this.endA.y);
-    return (this.slope * x) + intercept;
+    return this.slope * x + intercept;
+  }
+
+  split() {
+    const xOfMidPoint = (this.endA.x + this.endB.x) / 2;
+    const yOfMidPoint = (this.endA.y + this.endB.y) / 2;
+    return [
+      new Line(
+        { x: this.endA.x, y: this.endA.y },
+        { x: xOfMidPoint, y: yOfMidPoint }
+      ),
+      new Line(
+        { x: xOfMidPoint, y: yOfMidPoint },
+        { x: this.endB.x, y: this.endB.y }
+      )
+    ];
   }
 }
 
