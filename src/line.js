@@ -79,6 +79,13 @@ class Line {
       )
     ];
   }
+
+  hasPoint(point) {
+    if (!isNumberInRange(point.x, this.endA.x, this.endB.x)) return false;
+    if (!isNumberInRange(point.y, this.endA.y, this.endB.y)) return false;
+    const linesIntercept = getYIntercept(this.slope, this.endA.x, this.endA.y);
+    return point.y === this.slope * point.x + linesIntercept;
+  }
 }
 
 module.exports = { Line };

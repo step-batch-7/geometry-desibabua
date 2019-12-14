@@ -1,5 +1,6 @@
 const assert = require("chai").assert;
 const { Line } = require("../src/line");
+const { Point } = require("../src/point");
 
 describe("Line", function() {
   describe("toString", function() {
@@ -167,8 +168,16 @@ describe("Line", function() {
       let splittedLines = line.split();
       let expectedSplittedLine1 = new Line({ x: 0, y: 0 }, { x: 2, y: 2 });
       let expectedSplittedLine2 = new Line({ x: 2, y: 2 }, { x: 4, y: 4 });
-      assert.isTrue((splittedLines[0]).isEqualTo(expectedSplittedLine1));
-      assert.isTrue((splittedLines[1]).isEqualTo(expectedSplittedLine2));
+      assert.isTrue(splittedLines[0].isEqualTo(expectedSplittedLine1));
+      assert.isTrue(splittedLines[1].isEqualTo(expectedSplittedLine2));
+    });
+  });
+
+  describe("hasPoint", function() {
+    it("should validate point on a given line ", function() {
+      const line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
+      const point = new Point(2, 2);
+      assert.isTrue(line.hasPoint(point));
     });
   });
 });
