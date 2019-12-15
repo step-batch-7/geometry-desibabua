@@ -181,13 +181,31 @@ describe("Line", function() {
   });
 
   describe("split", function() {
-    it("should give splitted lines in an array", function() {
+    it("should give splitted lines of angled line", function() {
       let line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
-      let splittedLines = line.split();
-      let expectedSplittedLine1 = new Line({ x: 0, y: 0 }, { x: 2, y: 2 });
-      let expectedSplittedLine2 = new Line({ x: 2, y: 2 }, { x: 4, y: 4 });
-      assert.isTrue(splittedLines[0].isEqualTo(expectedSplittedLine1));
-      assert.isTrue(splittedLines[1].isEqualTo(expectedSplittedLine2));
+      let [firstLine, secondLine] = line.split();
+      let expectedFirstLine = new Line({ x: 0, y: 0 }, { x: 2, y: 2 });
+      let expectedSecondLine = new Line({ x: 2, y: 2 }, { x: 4, y: 4 });
+      assert.isTrue(firstLine.isEqualTo(expectedFirstLine));
+      assert.isTrue(secondLine.isEqualTo(expectedSecondLine));
+    });
+
+    it("should give splitted lines of horizontal line", function() {
+      let line = new Line({ x: 1, y: 1 }, { x: 4, y: 1 });
+      let [firstLine, secondLine] = line.split();
+      let expectedFirstLine = new Line({ x: 1, y: 1 }, { x: 2.5, y: 1 });
+      let expectedSecondLine = new Line({ x: 2.5, y: 1 }, { x: 4, y: 1 });
+      assert.isTrue(firstLine.isEqualTo(expectedFirstLine));
+      assert.isTrue(secondLine.isEqualTo(expectedSecondLine));
+    });
+
+    it("should give splitted lines of vertical line", function() {
+      let line = new Line({ x: 1, y: 1 }, { x: 1, y: 4 });
+      let [firstLine, secondLine] = line.split();
+      let expectedFirstLine = new Line({ x: 1, y: 1 }, { x: 1, y: 2.5 });
+      let expectedSecondLine = new Line({ x: 1, y: 2.5 }, { x: 1, y: 4 });
+      assert.isTrue(firstLine.isEqualTo(expectedFirstLine));
+      assert.isTrue(secondLine.isEqualTo(expectedSecondLine));
     });
   });
 
