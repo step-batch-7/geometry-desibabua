@@ -1,3 +1,6 @@
+"use strict";
+const { Point } = require("./point");
+
 const arePointsEqual = (pointA, pointB) =>
   pointA.x === pointB.x && pointA.y === pointB.y;
 
@@ -6,7 +9,7 @@ const getIntercept = function(slope, x, y) {
 };
 
 const isNumberInRange = function(number, rangeA, rangeB) {
-  const [start,end] = [rangeA, rangeB].sort();
+  const [start, end] = [rangeA, rangeB].sort();
   return number > start && number < end;
 };
 
@@ -74,8 +77,10 @@ class Line {
   }
 
   hasPoint(point) {
-    if (!isNumberInRange(point.x, this.endA.x, this.endB.x)) return false;
-    if (!isNumberInRange(point.y, this.endA.y, this.endB.y)) return false;
+    if (!(point instanceof Point)) return false;
+    const isXInRange = isNumberInRange(point.x, this.endA.x, this.endB.x);
+    const isYInRange = isNumberInRange(point.y, this.endA.y, this.endB.y);
+    if (!isXInRange || !isYInRange) return false;
     const linesIntercept = getIntercept(this.slope, this.endA.x, this.endA.y);
     return point.y === this.slope * point.x + linesIntercept;
   }

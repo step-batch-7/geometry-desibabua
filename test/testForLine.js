@@ -135,10 +135,10 @@ describe("Line", function() {
       assert.strictEqual(line.findX(2), 2);
     });
 
-    it("should give x of first point when line is parallel to y axis",function(){
+    it("should give x of first point when line is parallel to y axis", function() {
       const line = new Line({ x: 4, y: 0 }, { x: 4, y: 4 });
-      assert.strictEqual(line.findX(8),4)
-    })
+      assert.strictEqual(line.findX(8), 4);
+    });
 
     it("should give Nan when point is outside the line segment", function() {
       let line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
@@ -158,10 +158,10 @@ describe("Line", function() {
       assert.strictEqual(line.findY(2), 2);
     });
 
-    it("should give y of first point when line is parallel to x axis",function(){
+    it("should give y of first point when line is parallel to x axis", function() {
       const line = new Line({ x: 4, y: 4 }, { x: 0, y: 4 });
-      assert.strictEqual(line.findY(8),4)
-    })
+      assert.strictEqual(line.findY(8), 4);
+    });
 
     it("should give Nan when point is outside the line segment", function() {
       let line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
@@ -188,6 +188,16 @@ describe("Line", function() {
       const line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
       const point = new Point(2, 2);
       assert.isTrue(line.hasPoint(point));
+    });
+
+    it("should invalidate point if it is not instance of Point", function() {
+      let line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
+      let point = "";
+      assert.isFalse(line.hasPoint(point));
+
+      line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
+      point = { x: 1, y: 1 };
+      assert.isFalse(line.hasPoint(point));
     });
 
     it("should inValidate point it it is not on the given line ", function() {

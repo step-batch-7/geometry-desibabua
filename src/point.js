@@ -1,3 +1,5 @@
+"use strict";
+
 const arePointsEqual = (pointA, pointB) =>
   pointA.x === pointB.x && pointA.y === pointB.y;
 
