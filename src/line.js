@@ -56,14 +56,13 @@ class Line {
   }
 
   findX(y) {
-    if (this.slope === Infinity || this.slope === -Infinity) return this.endA.x;
     if (!isNumberInRange(y, this.endA.y, this.endB.y)) return NaN;
+    if (this.slope === Infinity || this.slope === -Infinity) return this.endA.x;
     const intercept = getIntercept(this.slope, this.endA.x, this.endA.y);
     return (y - intercept) / this.slope;
   }
 
   findY(x) {
-    if (this.slope === 0) return this.endA.x;
     if (!isNumberInRange(x, this.endA.x, this.endB.x)) return NaN;
     const intercept = getIntercept(this.slope, this.endA.x, this.endA.y);
     return this.slope * x + intercept;

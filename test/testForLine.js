@@ -136,8 +136,12 @@ describe("Line", function() {
     });
 
     it("should give x of first point when line is parallel to y axis", function() {
-      const line = new Line({ x: 4, y: 0 }, { x: 4, y: 4 });
-      assert.strictEqual(line.findX(8), 4);
+      let line = new Line({ x: 4, y: 0 }, { x: 4, y: 4 });
+      assert.isNaN(line.findX(8));
+      assert.isNaN(line.findX(-1));
+
+      line = new Line({ x: 4, y: 0 }, { x: 4, y: 4 });
+      assert.strictEqual(line.findX(3), 4);
     });
 
     it("should give Nan when point is outside the line segment", function() {
@@ -159,8 +163,12 @@ describe("Line", function() {
     });
 
     it("should give y of first point when line is parallel to x axis", function() {
-      const line = new Line({ x: 4, y: 4 }, { x: 0, y: 4 });
-      assert.strictEqual(line.findY(8), 4);
+      let line = new Line({ x: 4, y: 4 }, { x: 0, y: 4 });
+      assert.isNaN(line.findY(8));
+      assert.isNaN(line.findY(-1));
+
+      line = new Line({ x: 4, y: 4 }, { x: 0, y: 4 });
+      assert.strictEqual(line.findY(3), 4);
     });
 
     it("should give Nan when point is outside the line segment", function() {
