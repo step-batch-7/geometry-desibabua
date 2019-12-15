@@ -53,6 +53,7 @@ class Line {
   }
 
   findX(y) {
+    if (this.slope === Infinity || this.slope === -Infinity) return this.endA.x;
     if (!isNumberInRange(y, this.endA.y, this.endB.y)) return NaN;
     const intercept = getIntercept(this.slope, this.endA.x, this.endA.y);
     return (y - intercept) / this.slope;

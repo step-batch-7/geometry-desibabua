@@ -135,6 +135,11 @@ describe("Line", function() {
       assert.strictEqual(line.findX(2), 2);
     });
 
+    it("should give x of first point when line is parallel to y axis",function(){
+      const line = new Line({ x: 4, y: 0 }, { x: 4, y: 4 });
+      assert.strictEqual(line.findX(8),4)
+    })
+
     it("should give Nan when point is outside the line segment", function() {
       let line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
       assert.isNaN(line.findX(5));
