@@ -60,7 +60,7 @@ class Line {
   }
 
   findY(x) {
-    if (this.slope === 0 ) return this.endA.x;
+    if (this.slope === 0) return this.endA.x;
     if (!isNumberInRange(x, this.endA.x, this.endB.x)) return NaN;
     const intercept = getIntercept(this.slope, this.endA.x, this.endA.y);
     return this.slope * x + intercept;
@@ -69,10 +69,8 @@ class Line {
   split() {
     const middleX = (this.endA.x + this.endB.x) / 2;
     const middleY = (this.endA.y + this.endB.y) / 2;
-    return [
-      new Line({ x: this.endA.x, y: this.endA.y }, { x: middleX, y: middleY }),
-      new Line({ x: middleX, y: middleY }, { x: this.endB.x, y: this.endB.y })
-    ];
+    const midPoint = { x: middleX, y: middleY };
+    return [new Line(this.endA, midPoint), new Line(midPoint, this.endB)];
   }
 
   hasPoint(point) {
