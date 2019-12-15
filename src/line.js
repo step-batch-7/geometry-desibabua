@@ -5,9 +5,9 @@ const getIntercept = function(slope, x, y) {
   return y - slope * x;
 };
 
-const isNumberInRange = function(number, start, end) {
-  const range = [start, end].sort();
-  return number > range[0] && number < range[1];
+const isNumberInRange = function(number, rangeA, rangeB) {
+  const [start,end] = [rangeA, rangeB].sort();
+  return number > start && number < end;
 };
 
 class Line {
