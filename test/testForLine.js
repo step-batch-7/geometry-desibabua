@@ -265,6 +265,13 @@ describe("Line", function() {
       assert.isTrue(point.isEqualTo(returnedPoint));
     });
 
+    it("should give end point when the length is equal to total length", function() {
+      const line = new Line({ x: 0, y: 0 }, { x: 6, y: 8 });
+      const point = new Point(6, 8);
+      const returnedPoint = line.findPointFromStart(10);
+      assert.isTrue(point.isEqualTo(returnedPoint));
+    });
+
     it("should give Null when the length is large", function() {
       const line = new Line({ x: 0, y: 0 }, { x: 6, y: 8 });
       const returnedPoint = line.findPointFromStart(12);
@@ -284,6 +291,13 @@ describe("Line", function() {
       const line = new Line({ x: 0, y: 0 }, { x: 6, y: 8 });
       const point = new Point(6, 8);
       const returnedPoint = line.findPointFromEnd(0);
+      assert.isTrue(point.isEqualTo(returnedPoint));
+    });
+
+    it("should give start point when the length is equal to total length", function() {
+      const line = new Line({ x: 0, y: 0 }, { x: 6, y: 8 });
+      const point = new Point(0, 0);
+      const returnedPoint = line.findPointFromEnd(10);
       assert.isTrue(point.isEqualTo(returnedPoint));
     });
 
