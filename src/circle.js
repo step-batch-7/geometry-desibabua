@@ -14,6 +14,10 @@ class Circle {
     if (!(other instanceof Circle)) return false;
     return other.radius === this.radius && this.center.isEqualTo(other.center);
   }
+
+  get area() {
+    return Math.PI * this.radius ** 2;
+  }
 }
 
 module.exports = { Circle };
