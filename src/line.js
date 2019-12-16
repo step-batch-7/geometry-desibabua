@@ -19,7 +19,7 @@ class Line {
     this.endB = { x: endB.x, y: endB.y };
   }
 
-  get toString() {
+  toString() {
     const endA = `(${this.endA.x},${this.endA.y})`;
     const endB = `(${this.endB.x},${this.endB.y})`;
     return `[Line ${endA} to ${endB}]`;
@@ -28,8 +28,10 @@ class Line {
   isEqualTo(other) {
     if (!(other instanceof Line)) return false;
     return (
-      arePointsEqual(this.endA, other.endA) &&
-      arePointsEqual(this.endB, other.endB)
+      (arePointsEqual(this.endA, other.endA) &&
+        arePointsEqual(this.endB, other.endB)) ||
+      (arePointsEqual(this.endA, other.endB) &&
+        arePointsEqual(this.endB, other.endA))
     );
   }
 

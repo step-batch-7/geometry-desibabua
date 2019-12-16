@@ -6,7 +6,7 @@ describe("Line", function() {
   describe("toString", function() {
     it("should give expected representation of line", function() {
       const line = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
-      const actualValue = line.toString;
+      const actualValue = line.toString();
       const expectedValue = "[Line (1,2) to (3,4)]";
       assert.deepStrictEqual(actualValue, expectedValue);
     });
@@ -39,6 +39,13 @@ describe("Line", function() {
       const secondLine = "";
       const actualValue = firstLine.isEqualTo(secondLine);
       assert.isNotOk(actualValue);
+    });
+
+    it("should validate if equal lines are given with altered start and end", function() {
+      const firstLine = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
+      const secondLine = new Line({ x: 3, y: 4 }, { x: 1, y: 2 });
+      const actualValue = firstLine.isEqualTo(secondLine);
+      assert.ok(actualValue);
     });
   });
 
