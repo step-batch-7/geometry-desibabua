@@ -131,6 +131,12 @@ describe("Line", function() {
       let line2 = new Line({ x: 2, y: 2 }, { x: 3, y: 3 });
       assert.strictEqual(line1.isParallelTo(line2), false);
     });
+
+    it("should inValidate different line segment (overlapping)", function() {
+      let line1 = new Line({ x: 2, y: 5 }, { x: 2, y: 7 });
+      let line2 = new Line({ x: 2, y: 0 }, { x: 2, y: 4 });
+      assert.isFalse(line1.isParallelTo(line2));
+    });
   });
 
   describe("findX", function() {
@@ -241,6 +247,50 @@ describe("Line", function() {
       line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
       point = new Point(1, 5);
       assert.isFalse(line.hasPoint(point));
+    });
+  });
+
+  describe("findPointFromStart", function() {
+    it("should give a point on line which is at given distance from start", function() {
+      const line = new Line({ x: 0, y: 0 }, { x: 6, y: 8 });
+      const point = new Point(3, 4);
+      const returnedPoint = line.findPointFromStart(5);
+      assert.isTrue(point.isEqualTo(returnedPoint));
+    });
+
+    it("should give start point when the length is zero", function() {
+      const line = new Line({ x: 0, y: 0 }, { x: 6, y: 8 });
+      const point = new Point(0, 0);
+      const returnedPoint = line.findPointFromStart(0);
+      assert.isTrue(point.isEqualTo(returnedPoint));
+    });
+
+    it("should give Null when the length is large", function() {
+      const line = new Line({ x: 0, y: 0 }, { x: 6, y: 8 });
+      const returnedPoint = line.findPointFromStart(12);
+      assert.isNull(returnedPoint);
+    });
+  });
+
+  describe("findPointFromEnd", function() {
+    it("should give a point on line which is at given distance from end", function() {
+      const line = new Line({ x: 6, y: 8 }, { x: 0, y: 0 });
+      const point = new Point(3, 4);
+      const returnedPoint = line.findPointFromEnd(5);
+      assert.isTrue(point.isEqualTo(returnedPoint));
+    });
+
+    it("should give end point when the length is zero", function() {
+      const line = new Line({ x: 0, y: 0 }, { x: 6, y: 8 });
+      const point = new Point(6, 8);
+      const returnedPoint = line.findPointFromEnd(0);
+      assert.isTrue(point.isEqualTo(returnedPoint));
+    });
+
+    it("should give Null when the length is small", function() {
+      const line = new Line({ x: 0, y: 0 }, { x: 6, y: 8 });
+      const returnedPoint = line.findPointFromEnd(-1);
+      assert.isNull(returnedPoint);
     });
   });
 });

@@ -13,6 +13,13 @@ const isNumberInRange = function(number, rangeA, rangeB) {
   return number > start && number < end;
 };
 
+const getPoint = function(ratio, point1, point2) {
+  if (ratio < 0 || ratio > 1) return null;
+  const x = (1 - ratio) * point1.x + ratio * point2.x;
+  const y = (1 - ratio) * point1.y + ratio * point2.y;
+  return new Point(x, y);
+};
+
 class Line {
   constructor(endA, endB) {
     this.endA = { x: endA.x, y: endA.y };
@@ -84,6 +91,20 @@ class Line {
     if (!isXInRange || !isYInRange) return false;
     const linesIntercept = getIntercept(this.slope, this.endA.x, this.endA.y);
     return point.y === this.slope * point.x + linesIntercept;
+  }
+
+  findPointFromStart(distance) {
+    const totalLength = this.length;
+    const lengthRatio = distance / totalLength;
+    const [point1, point2] = [this.endA, this.endB];
+    return getPoint(lengthRatio, point1, point2);
+  }
+
+  findPointFromEnd(distance) {
+    const totalLength = this.length;
+    const lengthRatio = distance / totalLength;
+    const [point1, point2] = [this.endB, this.endA];
+    return getPoint(lengthRatio, point1, point2);
   }
 }
 
