@@ -8,4 +8,18 @@ describe("Circle", function() {
       assert.strictEqual(circle.toString(), "[Circle @(0,0) radius 5]");
     });
   });
+
+  describe("isEqualTo", function() {
+    it("should validate two circle having same centre and radius", function() {
+      const circle1 = new Circle({ x: 0, y: 0 }, 5);
+      const circle2 = new Circle({ x: 0, y: 0 }, 5);
+      assert.isTrue(circle1.isEqualTo(circle2));
+    });
+
+    it("should invalidate two circle having same centre and radius but not of same instance", function() {
+      const circle1 = new Circle({ x: 0, y: 0 }, 5);
+      const circle2 = { center: { x: 0, y: 0 }, radius: 5 };
+      assert.isFalse(circle1.isEqualTo(circle2));
+    });
+  });
 });
