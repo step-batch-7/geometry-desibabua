@@ -111,7 +111,7 @@ describe("Line", function() {
 
     it("should inValidate unParallel lines if they are of same instance", function() {
       let line1 = new Line({ x: 0, y: 0 }, { x: 1, y: 2 });
-      let line2 = new Line({ x: 4, y: 9 }, { x: 4, y: 0 });
+      let line2 = new Line({ x: 0, y: 0 }, { x: 1, y: 3 });
       assert.strictEqual(line1.isParallelTo(line2), false);
     });
 

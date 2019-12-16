@@ -1,16 +1,18 @@
 "use strict";
 const { Point } = require("./point");
 
+const arePointsCollinear = function(point1, point2, point3) {
+  const [x1, x2, x3] = [point1.x, point2.x, point3.x];
+  const [y1, y2, y3] = [point1.y, point2.y, point3.y];
+  return 0 === (1 / 2) * (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2));
+};
+
 const arePointsEqual = (pointA, pointB) =>
   pointA.x === pointB.x && pointA.y === pointB.y;
 
-const getIntercept = function(slope, x, y) {
-  return y - slope * x;
-};
-
 const isNumberInRange = function(number, rangeA, rangeB) {
   const [start, end] = [rangeA, rangeB].sort();
-  return number > start && number < end;
+  return number >= start && number <= end;
 };
 
 const getPoint = function(ratio, point1, point2) {
@@ -51,30 +53,23 @@ class Line {
   }
 
   isParallelTo(other) {
-    const linesIntercept = getIntercept(this.slope, this.endA.x, this.endA.y);
-    const othersIntercept = getIntercept(
-      other.slope,
-      other.endA.x,
-      other.endA.y
-    );
+    if (!(other instanceof Line)) return false;
     return (
       other instanceof Line &&
-      linesIntercept !== othersIntercept &&
-      this.slope === other.slope
+      !arePointsCollinear(this.endA, this.endB, other.endA)
     );
   }
 
   findX(y) {
     if (!isNumberInRange(y, this.endA.y, this.endB.y)) return NaN;
-    if (this.slope === Infinity || this.slope === -Infinity) return this.endA.x;
-    const intercept = getIntercept(this.slope, this.endA.x, this.endA.y);
-    return (y - intercept) / this.slope;
+    if (this.slope === 0) return this.endA.x;
+    return (y - this.endA.y) / this.slope + this.endA.x;
   }
 
   findY(x) {
     if (!isNumberInRange(x, this.endA.x, this.endB.x)) return NaN;
-    const intercept = getIntercept(this.slope, this.endA.x, this.endA.y);
-    return this.slope * x + intercept;
+    if (this.slope === Infinity || this.slope === -Infinity) return this.endA.y;
+    return this.slope * (x - this.endA.x) + this.endA.y;
   }
 
   split() {
@@ -88,9 +83,11 @@ class Line {
     if (!(point instanceof Point)) return false;
     const isXInRange = isNumberInRange(point.x, this.endA.x, this.endB.x);
     const isYInRange = isNumberInRange(point.y, this.endA.y, this.endB.y);
-    if (!isXInRange || !isYInRange) return false;
-    const linesIntercept = getIntercept(this.slope, this.endA.x, this.endA.y);
-    return point.y === this.slope * point.x + linesIntercept;
+    return (
+      isXInRange &&
+      isYInRange &&
+      arePointsCollinear(this.endA, this.endB, point)
+    );
   }
 
   findPointFromStart(distance) {
