@@ -1,6 +1,7 @@
 const assert = require("chai").assert;
 const { Point } = require("../src/point");
 const { Line } = require("../src/line");
+const { Circle } = require("../src/circle");
 
 describe("Point", function() {
   describe("toString", function() {
@@ -78,10 +79,22 @@ describe("Point", function() {
       assert.isTrue(point.isOn(line));
     });
 
+    it("should validate if point on the given circle", function() {
+      const circle = new Circle({ x: 0, y: 1 }, 5);
+      const point = new Point(5, 1);
+      assert.isTrue(point.isOn(circle));
+    });
+
     it("should invalidate if point on the given line", function() {
       const line = new Line({ x: 1, y: 1 }, { x: 6, y: 6 });
       const point = new Point(4, 3);
       assert.isFalse(point.isOn(line));
+    });
+
+    it("should invalidate if point on the given circle", function() {
+      const circle = new Circle({ x: 1, y: 1 }, 5);
+      const point = new Point(4, 3);
+      assert.isFalse(point.isOn(circle));
     });
   });
 });
