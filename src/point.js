@@ -32,6 +32,10 @@ class Point {
     const verDistance = otherPoint.y - this.y;
     return Math.hypot(horDistance, verDistance);
   }
+
+  isOn(other) {
+    return other.hasPoint(this)
+  }
 }
 
 module.exports = { Point };
