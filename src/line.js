@@ -93,10 +93,7 @@ class Line {
   }
 
   findPointFromEnd(distance) {
-    const totalLength = this.length;
-    const lengthRatio = distance / totalLength;
-    const [point1, point2] = [this.endB, this.endA];
-    return getPoint(lengthRatio, point1, point2);
+    return this.findPointFromStart(this.length - distance);
   }
 }
 
