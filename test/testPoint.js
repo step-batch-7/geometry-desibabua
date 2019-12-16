@@ -55,4 +55,18 @@ describe("Point", function() {
       assert.isTrue(point.isEqualTo(point.clone()));
     });
   });
+
+  describe("findDistanceTo", function() {
+    it("should find distance between two point", function() {
+      const point1 = new Point(1, 1);
+      const point2 = new Point(4, 5);
+      assert.strictEqual(point1.findDistanceTo(point2), 5);
+    });
+
+    it("should give Nan for  point of another instance", function() {
+      const point1 = new Point(1, 1);
+      const point2 = { x: 1, y: 2 };
+      assert.isNaN(point1.findDistanceTo(point2));
+    });
+  });
 });

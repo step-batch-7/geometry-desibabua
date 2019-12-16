@@ -25,6 +25,13 @@ class Point {
   clone() {
     return new Point(this.x, this.y);
   }
+
+  findDistanceTo(otherPoint) {
+    if (!(otherPoint instanceof Point)) return NaN;
+    const horDistance = otherPoint.x - this.x;
+    const verDistance = otherPoint.y - this.y;
+    return Math.hypot(horDistance, verDistance);
+  }
 }
 
 module.exports = { Point };
