@@ -1,8 +1,5 @@
 "use strict";
 
-const arePointsEqual = (pointA, pointB) =>
-  pointA.x === pointB.x && pointA.y === pointB.y;
-
 class Point {
   constructor(x, y) {
     [this.x, this.y] = [x, y];
@@ -10,16 +7,15 @@ class Point {
 
   isEqualTo(other) {
     if (!(other instanceof Point)) return false;
-    const [pointA, pointB] = [this, other];
-    return arePointsEqual(pointA, pointB);
+    return this.x === other.x && this.y === other.y;
   }
 
   toString() {
     return `[Point @(${this.x},${this.y})]`;
   }
 
-  visit(functionRef) {
-    return functionRef(this.x, this.y);
+  visit(action) {
+    return action(this.x, this.y);
   }
 
   clone() {
@@ -28,13 +24,13 @@ class Point {
 
   findDistanceTo(otherPoint) {
     if (!(otherPoint instanceof Point)) return NaN;
-    const horDistance = otherPoint.x - this.x;
-    const verDistance = otherPoint.y - this.y;
-    return Math.hypot(horDistance, verDistance);
+    const horizontalDistance = otherPoint.x - this.x;
+    const verticalDistance = otherPoint.y - this.y;
+    return Math.hypot(horizontalDistance, verticalDistance);
   }
 
   isOn(other) {
-    return other.hasPoint(this)
+    return other.hasPoint(this);
   }
 }
 

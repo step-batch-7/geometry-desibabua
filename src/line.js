@@ -7,9 +7,6 @@ const arePointsCollinear = function(point1, point2, point3) {
   return 0 === (1 / 2) * (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2));
 };
 
-const arePointsEqual = (pointA, pointB) =>
-  pointA.x === pointB.x && pointA.y === pointB.y;
-
 const isNumberInRange = function(number, rangeA, rangeB) {
   const [start, end] = [rangeA, rangeB].sort();
   return number >= start && number <= end;
@@ -24,8 +21,8 @@ const getPoint = function(ratio, point1, point2) {
 
 class Line {
   constructor(endA, endB) {
-    this.endA = { x: endA.x, y: endA.y };
-    this.endB = { x: endB.x, y: endB.y };
+    this.endA = new Point(endA.x, endA.y);
+    this.endB = new Point(endB.x, endB.y);
   }
 
   toString() {
@@ -37,10 +34,8 @@ class Line {
   isEqualTo(other) {
     if (!(other instanceof Line)) return false;
     return (
-      (arePointsEqual(this.endA, other.endA) &&
-        arePointsEqual(this.endB, other.endB)) ||
-      (arePointsEqual(this.endA, other.endB) &&
-        arePointsEqual(this.endB, other.endA))
+      (this.endA.isEqualTo(other.endA) && this.endB.isEqualTo(other.endB)) ||
+      (this.endA.isEqualTo(other.endB) && this.endB.isEqualTo(other.endA))
     );
   }
 
