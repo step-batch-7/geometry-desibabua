@@ -4,7 +4,7 @@ const { Point } = require("./point");
 const arePointsCollinear = function(point1, point2, point3) {
   const [x1, x2, x3] = [point1.x, point2.x, point3.x];
   const [y1, y2, y3] = [point1.y, point2.y, point3.y];
-  return 0 === (1 / 2) * (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2));
+  return x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2) === 0;
 };
 
 const isNumberInRange = function(number, rangeA, rangeB) {
@@ -45,15 +45,15 @@ class Line {
 
   get slope() {
     let slope = (this.endB.y - this.endA.y) / (this.endB.x - this.endA.x);
-    if (slope === Infinity || slope === -Infinity) slope = Infinity;
+    if (slope === -Infinity) slope = Infinity;
     return slope;
   }
 
   isParallelTo(other) {
     if (!(other instanceof Line)) return false;
     return (
-      other instanceof Line &&
-      !arePointsCollinear(this.endA, this.endB, other.endA)
+      !arePointsCollinear(this.endA, this.endB, other.endA) &&
+      this.slope == other.slope
     );
   }
 
@@ -70,9 +70,8 @@ class Line {
   }
 
   split() {
-    const middleX = (this.endA.x + this.endB.x) / 2;
-    const middleY = (this.endA.y + this.endB.y) / 2;
-    const midPoint = { x: middleX, y: middleY };
+    if (this.length == 0) return null;
+    const midPoint = this.findPointFromStart(this.length / 2);
     return [new Line(this.endA, midPoint), new Line(midPoint, this.endB)];
   }
 

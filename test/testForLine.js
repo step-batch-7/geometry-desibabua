@@ -87,17 +87,20 @@ describe("Line", function() {
     });
 
     it("should give slope of a given line(floating value)", function() {
-      line = new Line({ x: 0, y: 1 }, { x: 3, y: 0 });
+      let line = new Line({ x: 0, y: 1 }, { x: 3, y: 0 });
       assert.approximately(line.slope, -0.33, 0.01);
     });
 
     it("should give slope of a given line parallel to y - axis", function() {
-      line = new Line({ x: 0, y: 1 }, { x: 0, y: 5 });
+      let line = new Line({ x: 0, y: 1 }, { x: 0, y: 5 });
+      assert.strictEqual(line.slope, Infinity);
+
+      line = new Line({ x: 0, y: 5 }, { x: 0, y: 1 });
       assert.strictEqual(line.slope, Infinity);
     });
 
     it("should give slope of a given line parallel to x - axis", function() {
-      line = new Line({ x: 1, y: 0 }, { x: 6, y: 0 });
+      let line = new Line({ x: 1, y: 0 }, { x: 6, y: 0 });
       assert.strictEqual(line.slope, 0);
     });
   });
@@ -119,6 +122,12 @@ describe("Line", function() {
       let line1 = new Line({ x: 0, y: 8 }, { x: 0, y: 4 });
       let line2 = { endA: { x: 0, y: 8 }, endB: { x: 0, y: 4 } };
       assert.strictEqual(line1.isParallelTo(line2), false);
+    });
+
+    it("should invalidate if two lines are not parallel", function() {
+      const line1 = new Line({ x: 1, y: 6 }, { x: 2, y: 3 });
+      const line2 = new Line({ x: -2, y: 10 }, { x: -9, y: 6 });
+      assert.notOk(line1.isParallelTo(line2));
     });
 
     it("should inValidate same line segment (overlapping)", function() {
@@ -157,7 +166,12 @@ describe("Line", function() {
       assert.strictEqual(line.findX(3), 4);
     });
 
-    it("should give Nan when point is outside the line segment", function() {
+    it("should give x of first point when line is parallel to x axis", function() {
+      let line = new Line({ x: 0, y: 4 }, { x: 4, y: 4 });
+      assert.strictEqual(line.findX(4), 0);
+    });
+
+    it("should give NaN when point is outside the line segment", function() {
       let line = new Line({ x: 0, y: 0 }, { x: 4, y: 4 });
       assert.isNaN(line.findX(5));
 
@@ -173,6 +187,11 @@ describe("Line", function() {
 
       line = new Line({ x: 4, y: 4 }, { x: 0, y: 0 });
       assert.strictEqual(line.findY(2), 2);
+    });
+
+    it("should give x of first point when line is parallel to y axis", function() {
+      let line = new Line({ x: 4, y: 1 }, { x: 4, y: 4 });
+      assert.strictEqual(line.findY(4), 1);
     });
 
     it("should give y of first point when line is parallel to x axis", function() {
@@ -219,6 +238,11 @@ describe("Line", function() {
       let expectedSecondLine = new Line({ x: 1, y: 2.5 }, { x: 1, y: 4 });
       assert.isTrue(firstLine.isEqualTo(expectedFirstLine));
       assert.isTrue(secondLine.isEqualTo(expectedSecondLine));
+    });
+
+    it("should give null when length of line is zero", function() {
+      let line = new Line({ x: 1, y: 1 }, { x: 1, y: 1 });
+      assert.isNull(line.split());
     });
   });
 
