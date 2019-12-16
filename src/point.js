@@ -10,7 +10,8 @@ class Point {
 
   isEqualTo(other) {
     if (!(other instanceof Point)) return false;
-    return arePointsEqual(this.x, other.y);
+    const [pointA, pointB] = [this, other];
+    return arePointsEqual(pointA, pointB);
   }
 
   toString() {

@@ -36,6 +36,12 @@ describe("Point", function() {
       assert.isFalse(point1.isEqualTo(point2));
     });
 
+    it("should invalidate if co-ordinates of both points are not equal", function() {
+      const point1 = new Point(1, 2);
+      const point2 = new Point(3, 4);
+      assert.isFalse(point1.isEqualTo(point2));
+    });
+
     it("should invalidate to other point of other instance", function() {
       const point1 = new Point(1, 2);
       const point2 = "";
