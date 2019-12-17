@@ -1,6 +1,6 @@
 const assert = require("chai").assert;
-const { Circle } = require("../src/circle");
-const { Point } = require("../src/point");
+const Circle = require("../src/circle");
+const Point = require("../src/point");
 
 describe("Circle", function() {
   describe("toString", function() {
@@ -52,9 +52,9 @@ describe("Circle", function() {
 
     it("should invalidate point which is not a instance of point", function() {
       const circle = new Circle({ x: 0, y: 0 }, 7);
-      let point = {x:0,y:7}
+      let point = { x: 0, y: 7 };
       assert.isFalse(circle.hasPoint(point));
-      
+
       point = "";
       assert.isFalse(circle.hasPoint(point));
     });

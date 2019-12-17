@@ -1,5 +1,5 @@
 "use strict";
-const { Point } = require("./point");
+const Point = require("./point");
 
 const arePointsCollinear = function(point1, point2, point3) {
   const [x1, x2, x3] = [point1.x, point2.x, point3.x];
@@ -98,4 +98,4 @@ class Line {
   }
 }
 
-module.exports = { Line };
+module.exports = Line;
