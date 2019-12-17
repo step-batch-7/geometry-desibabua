@@ -59,4 +59,13 @@ describe("Circle", function() {
       assert.isFalse(circle.hasPoint(point));
     });
   });
+
+  describe('moveTo',function() {
+    it('should return a new circle at the given center of the same radius', function() {
+      const circle = new Circle({ x: 0, y: 0 }, 7);
+      const newCircle = circle.moveTo({x:1,y:1});
+      const expectedCircle = new Circle({ x: 1, y: 1 }, 7);
+      assert.isTrue(expectedCircle.isEqualTo(newCircle));
+    });
+  });
 });
