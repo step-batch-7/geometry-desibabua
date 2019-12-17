@@ -9,6 +9,12 @@ class Rectangle {
   toString() {
     return `[Rectangle (${this.pointA.x},${this.pointA.y}) to (${this.pointB.x},${this.pointB.y})]`;
   }
+
+  get area() {
+    const length = this.pointA.x - this.pointB.x;
+    const width = this.pointA.y - this.pointB.y;
+    return Math.abs(length * width);
+  }
 }
 
 module.exports = Rectangle;
