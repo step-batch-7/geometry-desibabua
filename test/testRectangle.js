@@ -110,12 +110,18 @@ describe("Rectangle", function() {
       assert.isTrue(rectangle.hasPoint(point));
     });
 
-    it("should invalidate when point is not on the rectangle length", function() {
-      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 1, y: 4 });
-      let point = new Point(2, 2);
+    it("should invalidate when point is not on the rectangle length or breadth", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 2, y: 4 });
+      let point = new Point(3, 1);
       assert.isFalse(rectangle.hasPoint(point));
 
       point = new Point(4, 7);
+      assert.isFalse(rectangle.hasPoint(point));
+    });
+
+    it("should invalidate when point is not the instance of point", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 2, y: 4 });
+      const point = { x: 1, y: 3 };
       assert.isFalse(rectangle.hasPoint(point));
     });
   });

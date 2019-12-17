@@ -38,6 +38,7 @@ class Rectangle {
   }
 
   hasPoint(point) {
+    if(!(point instanceof Point)) return false
     return (
       point.isOn(new Line(this.pointA, this.#pointB)) ||
       point.isOn(new Line(this.#pointB, this.pointC)) ||
