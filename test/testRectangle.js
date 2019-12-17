@@ -1,5 +1,6 @@
 const assert = require("chai").assert;
 const Rectangle = require("../src/rectangle");
+const Point = require("../src/point");
 
 describe("Rectangle", function() {
   describe("toString", function() {
@@ -42,14 +43,19 @@ describe("Rectangle", function() {
       assert.strictEqual(rectangle.perimeter, 16);
     });
 
-    it("should give perimeter  zero of a rectangle when diagonal is horizontal", function() {
+    it("should give perimeter of a rectangle when diagonal is horizontal", function() {
       const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 8, y: 1 });
       assert.strictEqual(rectangle.perimeter, 14);
     });
 
-    it("should give perimeter  zero of a rectangle when diagonal is vertical", function() {
+    it("should give perimeter of a rectangle when diagonal is vertical", function() {
       const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 1, y: 4 });
       assert.strictEqual(rectangle.perimeter, 6);
+    });
+
+    it("should give zero when length and breadth is zero", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 1, y: 1 });
+      assert.strictEqual(rectangle.perimeter, 0);
     });
   });
 
@@ -72,10 +78,45 @@ describe("Rectangle", function() {
       assert.isFalse(rectangle1.isEqualTo(rectangle2));
     });
 
-    it("should invalidate rectangle if it of different instance", function() {
+    it("should invalidate rectangle if it of different instance and point instance are also different", function() {
       const rectangle1 = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
       const rectangle2 = { pointA: { x: 1, y: 1 }, pointB: { x: 5, y: 4 } };
       assert.isFalse(rectangle1.isEqualTo(rectangle2));
+    });
+
+    it("should invalidate rectangle if it of different instance", function() {
+      const rectangle1 = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const rectangle2 = { pointA: new Point(1, 1), pointB: new Point(5, 4) };
+      assert.isFalse(rectangle1.isEqualTo(rectangle2));
+    });
+  });
+
+  describe("hasPoint", function() {
+    it("should validate if point is on rectangle's length", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      let point = new Point(3, 1);
+      assert.isTrue(rectangle.hasPoint(point));
+
+      point = new Point(3, 4);
+      assert.isTrue(rectangle.hasPoint(point));
+    });
+
+    it("should validate if point is on rectangle's width", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      let point = new Point(1, 3);
+      assert.isTrue(rectangle.hasPoint(point));
+
+      point = new Point(5, 2);
+      assert.isTrue(rectangle.hasPoint(point));
+    });
+
+    it("should invalidate when point is not on the rectangle length", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 1, y: 4 });
+      let point = new Point(2, 2);
+      assert.isFalse(rectangle.hasPoint(point));
+
+      point = new Point(4, 7);
+      assert.isFalse(rectangle.hasPoint(point));
     });
   });
 });
