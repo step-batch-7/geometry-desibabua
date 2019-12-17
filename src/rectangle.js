@@ -21,5 +21,14 @@ class Rectangle {
     const width = this.pointA.y - this.pointB.y;
     return 2 * (Math.abs(length) + Math.abs(width));
   }
+
+  isEqualTo(other) {
+    return (
+      (this.pointA.isEqualTo(other.pointA) &&
+        this.pointB.isEqualTo(other.pointB)) ||
+      (this.pointA.isEqualTo(other.pointB) &&
+        this.pointB.isEqualTo(other.pointA))
+    );
+  }
 }
 module.exports = Rectangle;

@@ -52,4 +52,30 @@ describe("Rectangle", function() {
       assert.strictEqual(rectangle.perimeter, 6);
     });
   });
+
+  describe("isEqualTo", function() {
+    it("should validate same rectangle", function() {
+      const rectangle1 = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const rectangle2 = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      assert.isTrue(rectangle1.isEqualTo(rectangle2));
+    });
+
+    it("should validate same rectangle with alternate rectangle", function() {
+      const rectangle1 = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const rectangle2 = new Rectangle({ x: 5, y: 4 }, { x: 1, y: 1 });
+      assert.isTrue(rectangle1.isEqualTo(rectangle2));
+    });
+
+    it("should invalidate other rectangle", function() {
+      const rectangle1 = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const rectangle2 = new Rectangle({ x: 1, y: 1 }, { x: 9, y: 4 });
+      assert.isFalse(rectangle1.isEqualTo(rectangle2));
+    });
+
+    it("should invalidate rectangle if it of different instance", function() {
+      const rectangle1 = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const rectangle2 = { pointA: { x: 1, y: 1 }, pointB: { x: 5, y: 4 } };
+      assert.isFalse(rectangle1.isEqualTo(rectangle2));
+    });
+  });
 });
