@@ -60,12 +60,38 @@ describe("Circle", function() {
     });
   });
 
-  describe('moveTo',function() {
-    it('should return a new circle at the given center of the same radius', function() {
+  describe("moveTo", function() {
+    it("should return a new circle at the given center of the same radius", function() {
       const circle = new Circle({ x: 0, y: 0 }, 7);
-      const newCircle = circle.moveTo({x:1,y:1});
+      const newCircle = circle.moveTo({ x: 1, y: 1 });
       const expectedCircle = new Circle({ x: 1, y: 1 }, 7);
       assert.isTrue(expectedCircle.isEqualTo(newCircle));
+    });
+  });
+
+  describe("covers", function() {
+    it("should return true when point is inside the circle", function() {
+      const circle = new Circle({ x: 0, y: 0 }, 7);
+      const point = new Point(1, 2);
+      assert.isTrue(circle.covers(point));
+    });
+
+    it("should return true when point is on the circle", function() {
+      const circle = new Circle({ x: 0, y: 0 }, 7);
+      const point = new Point(0, 7);
+      assert.isTrue(circle.covers(point));
+    });
+
+    it("should return false when point is outside the circle", function() {
+      const circle = new Circle({ x: 0, y: 0 }, 7);
+      const point = new Point(0, 8);
+      assert.isFalse(circle.covers(point));
+    });
+
+    it("should return false when point is not the instance of Point class", function() {
+      const circle = new Circle({ x: 0, y: 0 }, 7);
+      const point = {x:1,y:2};
+      assert.isFalse(circle.covers(point));
     });
   });
 });
