@@ -6,7 +6,7 @@ const getSides = function(point1, point2) {
 
   const pointB = new Point(pointC.x, pointA.y);
   const pointD = new Point(pointA.x, pointC.y);
-  
+
   const AB = new Line(pointA, pointB);
   const BC = new Line(pointB, pointC);
   const CD = new Line(pointC, pointD);
@@ -51,6 +51,13 @@ class Rectangle {
     if (!(point instanceof Point)) return false;
     const [AB, BC, CD, DA] = getSides(this.point1, this.point2);
     return point.isOn(AB) || point.isOn(BC) || point.isOn(CD) || point.isOn(DA);
+  }
+
+  covers(point) {
+    if (!(point instanceof Point)) return false;
+    const [x1, x2] = [this.point1.x, this.point2.x].sort();
+    const [y1, y2] = [this.point1.y, this.point2.y].sort();
+    return x1 <= point.x && point.x <= x2 && y1 <= point.y && point.y <= y2;
   }
 }
 

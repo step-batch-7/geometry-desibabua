@@ -125,4 +125,30 @@ describe("Rectangle", function() {
       assert.isFalse(rectangle.hasPoint(point));
     });
   });
+
+  describe("covers", function() {
+    it("should validate when the point is inside the rectangle", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const point = new Point(2, 3);
+      assert.ok(rectangle.covers(point));
+    });
+
+    it("should validate when the point is on the perimeter of rectangle", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const point = new Point(2, 1);
+      assert.ok(rectangle.covers(point));
+    });
+
+    it("should invalidate when points are outside the rectangle", function() {
+      const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 2, y: 2 });
+      const point = new Point(4, 4);
+      assert.isFalse(rectangle.covers(point));
+    });
+
+    it("should invalidate when points is not the instance of point", function() {
+      const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 2, y: 2 });
+      const point = { x: 1, y: 1 };
+      assert.isFalse(rectangle.covers(point));
+    });
+  });
 });
