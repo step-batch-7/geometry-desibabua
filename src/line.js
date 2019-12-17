@@ -70,8 +70,9 @@ class Line {
   }
 
   split() {
-    if (this.length == 0) return null;
-    const midPoint = this.findPointFromStart(this.length / 2);
+    const middleX = (this.endA.x + this.endB.x) / 2;
+    const middleY = (this.endA.y + this.endB.y) / 2;
+    const midPoint = { x: middleX, y: middleY };
     return [new Line(this.endA, midPoint), new Line(midPoint, this.endB)];
   }
 

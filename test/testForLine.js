@@ -240,9 +240,12 @@ describe("Line", function() {
       assert.isTrue(secondLine.isEqualTo(expectedSecondLine));
     });
 
-    it("should give null when length of line is zero", function() {
+    it("should give same line when length of line is zero", function() {
       let line = new Line({ x: 1, y: 1 }, { x: 1, y: 1 });
-      assert.isNull(line.split());
+      let [firstLine, secondLine] = line.split();
+      let expectedFirstLine = new Line({ x: 1, y: 1 }, { x: 1, y: 1 });
+      assert.isTrue(firstLine.isEqualTo(expectedFirstLine));
+      assert.isTrue(secondLine.isEqualTo(expectedFirstLine));
     });
   });
 
