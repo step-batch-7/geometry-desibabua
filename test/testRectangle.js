@@ -30,4 +30,26 @@ describe("Rectangle", function() {
       assert.strictEqual(rectangle.area, 0);
     });
   });
+
+  describe("perimeter", function() {
+    it("should give perimeter of a rectangle when diagonal is inclined", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      assert.strictEqual(rectangle.perimeter, 14);
+    });
+
+    it("should give perimeter of a rectangle when diagonal is with alternate length", function() {
+      const rectangle = new Rectangle({ x: 5, y: 5 }, { x: 1, y: 1 });
+      assert.strictEqual(rectangle.perimeter, 16);
+    });
+
+    it("should give perimeter  zero of a rectangle when diagonal is horizontal", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 8, y: 1 });
+      assert.strictEqual(rectangle.perimeter, 14);
+    });
+
+    it("should give perimeter  zero of a rectangle when diagonal is vertical", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 1, y: 4 });
+      assert.strictEqual(rectangle.perimeter, 6);
+    });
+  });
 });
