@@ -15,6 +15,11 @@ describe("Rectangle", function() {
       assert.strictEqual(rectangle.area, 12);
     });
 
+    it("should give area of a rectangle when diagonal is with alternate length", function() {
+      const rectangle = new Rectangle({ x: 5, y: 4 }, { x: 1, y: 1 });
+      assert.strictEqual(rectangle.area, 12);
+    });
+
     it("should give area  zero of a rectangle when diagonal is horizontal", function() {
       const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 8, y: 1 });
       assert.strictEqual(rectangle.area, 0);
