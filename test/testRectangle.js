@@ -136,7 +136,7 @@ describe("Rectangle", function() {
     it("should validate when the point is on the perimeter of rectangle", function() {
       const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
       const point = new Point(2, 1);
-      assert.ok(rectangle.covers(point));
+      assert.notOk(rectangle.covers(point));
     });
 
     it("should invalidate when points are outside the rectangle", function() {

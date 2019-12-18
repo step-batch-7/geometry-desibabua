@@ -57,7 +57,7 @@ class Rectangle {
     if (!(point instanceof Point)) return false;
     const [x1, x2] = [this.point1.x, this.point2.x].sort();
     const [y1, y2] = [this.point1.y, this.point2.y].sort();
-    return x1 <= point.x && point.x <= x2 && y1 <= point.y && point.y <= y2;
+    return x1 < point.x && point.x < x2 && y1 < point.y && point.y < y2;
   }
 }
 
