@@ -13,12 +13,6 @@ const getSides = function(pointA, pointC) {
   return [AB, BC, CD, DA];
 };
 
-const getLengthAndWidth = function(point1, point2) {
-  const length = Math.abs(point1.x - point2.x);
-  const width = Math.abs(point1.y - point2.y);
-  return [length, width];
-};
-
 class Rectangle {
   constructor(point1, point2) {
     this.point1 = new Point(point1.x, point1.y);
@@ -30,13 +24,13 @@ class Rectangle {
   }
 
   get area() {
-    const [length, width] = getLengthAndWidth(this.point1, this.point2);
-    return length * width;
+    const [AB, BC] = getSides(this.point1, this.point2);
+    return AB.length * BC.length;
   }
 
   get perimeter() {
-    const [length, width] = getLengthAndWidth(this.point1, this.point2);
-    return 2 * (length + width);
+    const [AB, BC] = getSides(this.point1, this.point2);
+    return 2 * (AB.length + BC.length);
   }
 
   isEqualTo(other) {
