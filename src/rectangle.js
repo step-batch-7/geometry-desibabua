@@ -1,9 +1,7 @@
 const Point = require("../src/point");
 const Line = require("../src/line");
 
-const getSides = function(point1, point2) {
-  const [pointA, pointC] = [point1, point2];
-
+const getSides = function(pointA, pointC) {
   const pointB = new Point(pointC.x, pointA.y);
   const pointD = new Point(pointA.x, pointC.y);
 
@@ -13,6 +11,12 @@ const getSides = function(point1, point2) {
   const DA = new Line(pointD, pointA);
 
   return [AB, BC, CD, DA];
+};
+
+const getLengthAndWidth = function(point1, point2) {
+  const length = Math.abs(point1.x - point2.x);
+  const width = Math.abs(point1.y - point2.y);
+  return [length, width];
 };
 
 class Rectangle {
@@ -26,15 +30,13 @@ class Rectangle {
   }
 
   get area() {
-    const length = this.point1.x - this.point2.x;
-    const width = this.point1.y - this.point2.y;
-    return Math.abs(length * width);
+    const [length, width] = getLengthAndWidth(this.point1, this.point2);
+    return length * width;
   }
 
   get perimeter() {
-    const length = this.point1.x - this.point2.x;
-    const width = this.point1.y - this.point2.y;
-    return 2 * (Math.abs(length) + Math.abs(width));
+    const [length, width] = getLengthAndWidth(this.point1, this.point2);
+    return 2 * (length + width);
   }
 
   isEqualTo(other) {
